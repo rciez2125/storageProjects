@@ -4,13 +4,13 @@ import pandas as pd
 # load the full data file
 
 df = pd.read_csv('projects.csv')
-print(df.columns)
+#print(df.columns)
 df.insert(7, "Rated Energy", "", True)
 df.insert(8, "Duration", "", True)
 df.insert(9, "Modular", "", True)
 
 # split projects by battery type
-print(df.columns)
+#print(df.columns)
 #print(df[' Technology Broad Category'].unique())
 
 def separateByTechType(df):
@@ -70,10 +70,15 @@ def separateByTechType(df):
 	return(df)
 
 #n = df.loc[df[' Technology Mid-Type'] == 'nan']
-df = separateByTechType(df)
+#df = separateByTechType(df)
 
 # check to see if the csv files have entries that already exist 
-def checkPreviousEntries(refDF, newDF):
-	
+#def checkPreviousEntries(refDF, newDF): # work in progress
 
-
+x = df.loc[df[' Technology Broad Category']=='Thermal Storage'] #searches for values that match based on column name
+print(x) 
+print(x.index[0]) #returns the index of the first match 
+df = df[x.index[0]:] # gets rid of everything before the first match 
+print(df)
+df = df.reset_index() #reorders the index to start from zero 
+print(df)
